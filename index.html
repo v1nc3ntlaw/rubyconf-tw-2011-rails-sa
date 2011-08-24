@@ -30,9 +30,12 @@
   </head>
   
   <style>
-    /* Your individual styles here, or just use inline styles if that’s
-       what you want. */
-
+    body h3 {
+      font-size: 36px;
+    }
+    body span.smaller {
+      font-size: 24px;
+    }
     /* powered-by-rails */
     article.powered-by-rails .techbang-logo-big {
       margin-top: 30px;
@@ -45,6 +48,9 @@
     article.powered-by-rails ul {
       margin-top: 8px;
       margin-left: 372px;
+    }
+    article.powered-by-rails div.source {
+      top: 600px;
     }
   </style>
 
@@ -62,7 +68,7 @@
       </article>
 
       <article>
-        <h3>about.me/v1nc3ntlaw</h3>
+        <h1>about.me/v1nc3ntlaw</h1>
         <p>Sheng-Zhe Lin 林聖哲</p>
         <p>Rails developer and linux system administrator at Techbang.</p>
       </article>
@@ -86,30 +92,66 @@
           <li>Single Sign On (SSO)</li>
           <li>Events</li>
         </ul>
+        <div class="source">
+          http://www.techbang.com.tw<br/>
+          http://digiphoto.techbang.com.tw<br/>
+          http://game.techbang.com.tw<br/>
+          http://t17.techbang.com.tw<br/>
+        </div>
       </article>
 
       <article>
-        <h3>Rails Production Server</h3>
+        <h1>Rails Production Server</h1>
         <ul>
           <li>Ubuntu (LTS) / Debian (Stable)</li>
           <li>Ruby Enterprise Edition (1.8.7)</li>
+          <li>
+            Nginx + Passenger<br/>
+            <span class="smaller">passenger-install-nginx-module</span>
+          </li>
         </ul>
+        <div class="source">
+          https://github.com/jnstq/rails-nginx-passenger-ubuntu<br/>
+          http://www.rubyenterpriseedition.com/
+        </div>
       </article>
 
       <article>
-        <h1>Monitor Rails</h1>
+        <h1>Rails and Server Monitoring</h1>
       </article>
 
       <article>
         <h3>New Relic</h3>
+        <div class="source">
+          http://newrelic.com/
+        </div>
       </article>
 
       <article>
         <h3>Scout</h3>
+        <div class="source">
+          https://scoutapp.com/
+        </div>
       </article>
 
       <article>
-        <h1>Nginx with Passenger Tuning</h1>
+        <h1>Open Source Solution</h1>
+        <table>
+          <tr>
+            <td>
+              Nagios
+            <td>
+              Alert
+          <tr>
+            <td>
+              Cacti
+            <td>
+              Chart
+        </table>
+      </article>
+
+      <article>
+        <h1>Nginx and Passenger Tuning</h1>
       </article>
 
       <article>
@@ -124,13 +166,13 @@
 
       <article>
         <h3>Memcached Failover</h3>
+        <p>config/enviroments/production.rb</p>
         <section>
-          <pre class="prettyprint">
+<pre>
 MEMCACHE_SERVERS = ["192.168.100.3:11211", "192.168.100.4:11211"]
 config.cache_store = :mem_cache_store, MEMCACHE_SERVERS, {
   :namespace => "techbang"
-}
-          </pre>
+}</pre>
         </section>
       </article>
 

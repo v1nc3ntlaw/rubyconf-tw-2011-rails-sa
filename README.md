@@ -13,7 +13,7 @@ Subjects
 --------
 
 1. Rails Production Server
-2. Monitor Rails
-3. Nginx with Passenger Tuning
+2. Rails and Server Monitoring
+3. Nginx and Passenger Tuning
 4. Load Balancing on Rails
 5. Rails Backup Solution

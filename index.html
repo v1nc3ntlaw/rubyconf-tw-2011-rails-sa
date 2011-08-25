@@ -202,13 +202,40 @@
       </article>
 
       <article>
-        <h3>Preheat Rails Asset Cache</h3>
-        <p>Rails Asset Cache</p>
-        <p>merge multiple css or js files into one file</p>
-        <p>decrease http requests</p>
-        <p>processing view generate when it not exist</p>
-        <p>Jammit</p>
-        <p>capistrano deploy hook</p>
+        <h1 class="upper">Rails Asset Cache</h1>
+        <ul>
+          <li>merge multiple css or js files into one file</li>
+          <li>decrease http requests</li>
+          <li>render view generate when it not exist</li>
+          <li>
+            with cdn prefix<br/>
+            http://cdn0.techbang.com.tw/all.css?1314077705
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Problem with Rails Asset Cache</h3>
+        <img src="images/railsassetcacheproblemwithloadbalancing.png" width="" height="600">
+      </article>
+
+      <article>
+        <h3>Preheat Rails Asset Cache: Jammit</h3>
+        <p>An industrial strength asset packaging library for Rails</p>
+        <ul>
+          <li>support compress by YUI, Closure, or UglifyJS</li>
+          <li>capistrano deploy hook</li>
+        </ul>
+<pre>
+task :preheat_assets, :roles => [:web] do
+  run "cd #{release_path} && bundle exec jammit --base-url http://www.techbang.com.tw"
+end
+
+# before symblo link to current and touch tmp/restart.txt
+before "deploy:symlink", "my_tasks:preheat_assets"</pre>
+        <div class="source">
+          http://documentcloud.github.com/jammit/
+        </div>
       </article>
 
       <article>

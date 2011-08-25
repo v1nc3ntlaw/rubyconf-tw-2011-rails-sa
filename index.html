@@ -186,6 +186,10 @@
       </article>
 
       <article>
+        <h3>Nginx and Passenger Configuration</h3>
+      </article>
+
+      <article>
         <h3>Nginx upload module</h3>
         <div class="source">
           http://www.grid.net.ru/nginx/upload.en.html
@@ -275,14 +279,56 @@ require "whenever/capistrano"</pre>
       </article>
 
       <article>
-        <h3>Backup</h3>
+        <h1 class="upper">Backup (RubyGem)</h1>
+        <ul class="build">
+          <li>Database: MySQL, PostgreSQL, MongoDB, Redis</li>
+          <li>Backup Type: RSync, Tar archive (Gzip, Bzip2)</li>
+          <li>Cloud Storage: S3, Dropbox, Rackspace Cloud</li>
+          <li>Remote Servers (FTP, SFTP, SCP and RSync)</li>
+          <li>Notifiers: Mail, Twitter, Campfire, Presently</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Backup (RubyGem)</h3>
+        <p>backup perform -t local_backup</p>
+<pre>
+Backup::Model.new(:local_backup, "Backup!") do
+  backup_path = "/mnt/backup_copy/project"
+  backup_list = []
+  backup_list << "/home/rails/project/shared/system"
+  backup_list << "/home/rails/project/shared/config"
+
+  if File.directory? backup_path
+    system("rsync -ravh --delete #{backup_list.join(" ")} #{backup_path}")
+  end
+end</pre>
+        <p>Backup has a <code>great wiki</code>, explains each component in detail with many examples.</p>
         <div class="source">
           http://rubygems.org/gems/backup
         </div>
       </article>
 
       <article>
-        <h3>Configuration Stay with Project</h3>
+        <h3>Backup Target</h3>
+<pre>
+project/
+├── current -> /home/rails/project/releases/20110819032217
+├── releases
+│   ├── 20110728073852
+│   ├── ...
+│   └── 20110819032217
+└── shared
+    ├── bundle
+    ├── cached-copy
+    ├── <span class="red">config</span> => current/config/database.yml
+    ├── log
+    ├── pids
+    └── <span class="red">system</span> => current/public/system</pre>
+      </article>
+
+      <article>
+        <h3 class="upper">Configuration Stay with Project</h3>
         <table>
           <tr>
             <td>
@@ -296,6 +342,15 @@ require "whenever/capistrano"</pre>
               config/backup.rb
         </table>
         <p>backup run at one main server only</p>
+<pre>
+# config/schedule.rb
+host = `hostname`.chomp
+if host == "main_server"
+  command "cd /home/rails/project/current && \
+  AWS_CALLING_FORMAT=SUBDOMAIN backup perform -t local_backup \
+  --config_file 'config/backup.rb'"
+end
+</pre>
       </article>
 
       <article>

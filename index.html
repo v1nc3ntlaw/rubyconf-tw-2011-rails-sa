@@ -187,12 +187,21 @@
 
       <article>
         <h3>Nginx and Passenger Configuration</h3>
+<pre>
+worker_processes 16;
+worker_rlimit_nofile 32768;
+
+events {
+  worker_connections 8192;
+  use epoll;
+}
+</pre>
       </article>
 
       <article>
         <h3>Nginx upload module</h3>
         <div class="source">
-          http://www.grid.net.ru/nginx/upload.en.html
+          http://matthewhutchinson.net/2010/1/6/nginx-upload-module-with-paperclip-on-rails
         </div>
       </article>
 
@@ -374,9 +383,11 @@ project/
 # config/schedule.rb
 host = `hostname`.chomp
 if host == "main_server"
-  command "cd /home/rails/project/current && \
-  AWS_CALLING_FORMAT=SUBDOMAIN backup perform -t local_backup \
-  --config_file 'config/backup.rb'"
+  every 6.hours do
+    command "cd /home/rails/project/current && \
+    AWS_CALLING_FORMAT=SUBDOMAIN backup perform -t local_backup \
+    --config_file 'config/backup.rb'"
+  end
 end
 </pre>
       </article>

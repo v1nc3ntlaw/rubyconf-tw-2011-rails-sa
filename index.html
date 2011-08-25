@@ -30,9 +30,15 @@
   </head>
   
   <style>
-    /* Your individual styles here, or just use inline styles if that’s
-       what you want. */
-
+    body h1.upper {
+      margin-top: 100px;
+    }
+    body h3 {
+      font-size: 36px;
+    }
+    body span.smaller {
+      font-size: 24px;
+    }
     /* powered-by-rails */
     article.powered-by-rails .techbang-logo-big {
       margin-top: 30px;
@@ -45,6 +51,9 @@
     article.powered-by-rails ul {
       margin-top: 8px;
       margin-left: 372px;
+    }
+    article.powered-by-rails div.source {
+      top: 600px;
     }
   </style>
 
@@ -60,12 +69,11 @@
         August 27, 2011
         </p>
       </article>
-      
+
       <article>
-        <h3>about.me/v1nc3ntlaw</h3>
+        <h1>about.me/v1nc3ntlaw</h1>
         <p>Sheng-Zhe Lin 林聖哲</p>
         <p>Rails developer and linux system administrator at Techbang.</p>
-        <p>He loves vim and command line tools. His goal is become a Rails SA Ninja, keep agile and moves silent.</p>
       </article>
 
       <article class="powered-by-rails">
@@ -87,260 +95,295 @@
           <li>Single Sign On (SSO)</li>
           <li>Events</li>
         </ul>
+        <div class="source">
+          http://www.techbang.com.tw<br/>
+          http://digiphoto.techbang.com.tw<br/>
+          http://game.techbang.com.tw<br/>
+          http://t17.techbang.com.tw<br/>
+        </div>
+      </article>
+
+      <article>
+        <h1>Rails Production Server</h1>
+        <ul>
+          <li>Ubuntu (LTS) / Debian (Stable)</li>
+          <li>Ruby Enterprise Edition (1.8.7)</li>
+          <li>
+            Nginx + Passenger<br/>
+            <span class="smaller">passenger-install-nginx-module</span>
+          </li>
+        </ul>
+        <div class="source">
+          https://github.com/jnstq/rails-nginx-passenger-ubuntu<br/>
+          http://www.rubyenterpriseedition.com/
+        </div>
+      </article>
+
+      <article>
+        <h1>Rails and Server Monitoring</h1>
+      </article>
+
+      <article>
+        <h3>New Relic</h3>
+        <div class="source">
+          http://newrelic.com/
+        </div>
+      </article>
+
+      <article>
+        <h3>Scout</h3>
+        <div class="source">
+          https://scoutapp.com/
+        </div>
+      </article>
+
+      <article>
+        <h1>Open Source Solution</h1>
+        <p>Nagios + Cacti</p>
+      </article>
+
+      <article>
+        <h1 class="upper">Nagios</h1>
+        <p>services current status, unusual situation or crash alert</p>
+        <p><img src="images/nagios-irc-alert-6d1x.png"></p>
+        <div class="source">
+          http://www.nagios.org/
+        </div>
+      </article>
+
+      <article>
+        <h3>Cacti</h3>
+        <p>devices data graphing solution</p>
+        <ul>
+          <li>
+            CPU Usage<br/>
+            <img src="images/cacti-cpu-usage-85jq.png" width="408" height="170">
+          </li>
+          <li style="float: left;">
+            Disk IO<br/>
+            <img src="images/cacti-disk-io-29jh.png" width="204" height="85">
+          </li>
+          <li style="float: left; margin-left: 50px;">
+            Memory Usage<br/>
+            <img src="images/cacti-memory-usage-84h1.png" width="204" height="85">
+          </li>
+        </ul>
+        <div class="source">
+          http://www.cacti.net/
+        </div>
+      </article>
+
+      <article>
+        <h1>God</h1>
+        <p>save me</p>
+        <div class="source">
+          http://rubygems.org/gems/god
+        </div>
+      </article>
+
+      <article>
+        <h1>Nginx and Passenger Tuning</h1>
+      </article>
+
+      <article>
+        <h3>Nginx and Passenger Configuration</h3>
+      </article>
+
+      <article>
+        <h3>Nginx upload module</h3>
+        <div class="source">
+          http://www.grid.net.ru/nginx/upload.en.html
+        </div>
+      </article>
+
+      <article>
+        <h1>Load Balancing on Rails</h1>
+        <p>HAProxy <code>F5 BIG-IP</code></p>
+      </article>
+
+      <article>
+        <h1 class="upper">Rails Asset Cache</h1>
+        <ul>
+          <li>merge multiple css or js files into one file</li>
+          <li>decrease http requests</li>
+          <li>render view generate when it not exist</li>
+          <li>
+            with cdn prefix<br/>
+            http://cdn0.techbang.com.tw/all.css?1314077705
+          </li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Problem with Rails Asset Cache</h3>
+        <img src="images/railsassetcacheproblemwithloadbalancing.png" width="" height="600">
+      </article>
+
+      <article>
+        <h3>Preheat Rails Asset Cache: Jammit</h3>
+        <p>An industrial strength asset packaging library for Rails</p>
+        <ul>
+          <li>support compress by YUI, Closure, or UglifyJS</li>
+          <li>capistrano deploy hook</li>
+        </ul>
+<pre>
+task :preheat_assets, :roles => [:web] do
+  run "cd #{release_path} && bundle exec jammit --base-url http://www.techbang.com.tw"
+end
+
+# before symblo link to current and touch tmp/restart.txt
+before "deploy:symlink", "my_tasks:preheat_assets"</pre>
+        <div class="source">
+          http://documentcloud.github.com/jammit/
+        </div>
+      </article>
+
+      <article>
+        <h1 class="upper" style="font-size: 48px;">Memcached Distribute and Failover</h1>
+        <p>config/enviroments/production.rb</p>
+<pre>
+MEMCACHE_SERVERS = ["192.168.100.3:11211", "192.168.100.4:11211"]
+config.cache_store = :mem_cache_store, MEMCACHE_SERVERS, {
+  :namespace => "techbang"
+}</pre>
+      </article>
+
+      <article>
+        <h1>Rails Backup Solution</h1>
+        <p>Whenever + Backup Gems</p>
+      </article>
+
+      <article>
+        <h1 class="upper">Whenever</h1>
+        <p>Cron jobs in Ruby</p>
+        <p>
+          Linux Crontab Format<br/>
+          # min hour dom mon dow command
+        </p>
+        <table>
+          <tr>
+            <th colspan="3">
+              Whenever DSL
+          <tr>
+            <td>
+              every :hour
+            <td>
+              every 3.hours
+            <td>
+              every 1.hour, :at => 30
+          <tr>
+            <td colspan="2">
+              every 1.day, :at => '4:30 am'
+            <td>
+              every '0 0 27-31 * *'
+        </table>
+      </article>
+
+      <article>
+        <h1 class="upper">Whenever</h1>
+        <p>job_type: command, rake task</p>
+<pre>
+# whenever config/schedule.rb
+every 1.day, :at => "23:45" do
+  command "echo 'Say Hello!'"
+  rake "mail:notification"
+end
+# generated crontab
+45 23 * * * /bin/bash -l -c 'echo '\''Say Hello!'\'''
+45 23 * * * /bin/bash -l -c 'cd project && \
+RAILS_ENV=production bundle exec rake mail:notification'</pre>
+      </article>
+
+      <article>
+        <h1 class="upper">Whenever</h1>
+        <p>Capistrano integration, update crontab with deploy</p>
+<pre>
+# config/deploy.rb
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"</pre>
+        <div class="source">
+          http://rubygems.org/gems/whenever
+        </div>
+      </article>
+
+      <article>
+        <h1 class="upper">Backup (RubyGem)</h1>
+        <ul class="build">
+          <li>Database: MySQL, PostgreSQL, MongoDB, Redis</li>
+          <li>Backup Type: RSync, Tar archive (Gzip, Bzip2)</li>
+          <li>Cloud Storage: S3, Dropbox, Rackspace Cloud</li>
+          <li>Remote Servers (FTP, SFTP, SCP and RSync)</li>
+          <li>Notifiers: Mail, Twitter, Campfire, Presently</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Backup (RubyGem)</h3>
+        <p>backup perform -t local_backup</p>
+<pre>
+Backup::Model.new(:local_backup, "Backup!") do
+  backup_path = "/mnt/backup_copy/project"
+  backup_list = []
+  backup_list << "/home/rails/project/shared/system"
+  backup_list << "/home/rails/project/shared/config"
+
+  if File.directory? backup_path
+    system("rsync -ravh --delete #{backup_list.join(" ")} #{backup_path}")
+  end
+end</pre>
+        <p>Backup has a <code>great wiki</code>, explains each component in detail with many examples.</p>
+        <div class="source">
+          http://rubygems.org/gems/backup
+        </div>
+      </article>
+
+      <article>
+        <h3>Backup Target</h3>
+<pre>
+project/
+├── current -> /home/rails/project/releases/20110819032217
+├── releases
+│   ├── 20110728073852
+│   ├── ...
+│   └── 20110819032217
+└── shared
+    ├── bundle
+    ├── cached-copy
+    ├── <span class="red">config</span> => current/config/database.yml
+    ├── log
+    ├── pids
+    └── <span class="red">system</span> => current/public/system</pre>
+      </article>
+
+      <article>
+        <h3 class="upper">Configuration Stay with Project</h3>
+        <table>
+          <tr>
+            <td>
+              Whenever
+            <td>
+              config/schedule.rb
+          <tr>
+            <td>
+              Backup
+            <td>
+              config/backup.rb
+        </table>
+        <p>backup run at one main server only</p>
+<pre>
+# config/schedule.rb
+host = `hostname`.chomp
+if host == "main_server"
+  command "cd /home/rails/project/current && \
+  AWS_CALLING_FORMAT=SUBDOMAIN backup perform -t local_backup \
+  --config_file 'config/backup.rb'"
+end
+</pre>
       </article>
 
       <article>
         <h1>Q & A</h1>
         <h2>Thanks!</h2>
-      </article>
-
-      <article>
-        <h3>
-          Slide with bullet points that builds
-        </h3>
-        <ul class="build">
-          <li>
-            This is an example of a list
-          </li>
-          <li>
-            The list items fade in
-          </li>
-          <li>
-            Last one!
-          </li>
-        </ul>
-
-        <div class="build">
-          <p>Any element with child nodes can build.</p>
-          <p>It doesn't have to be a list.</p>
-        </div>
-      </article>
-
-      <article class='smaller'>
-        <h3>
-          Slide with bullet points (small font)
-        </h3>
-        <ul>
-          <li>
-            Use this template to create your presentation
-          <li>
-            Use the provided color palette, box and arrow graphics, and
-            chart styles
-          <li>
-            Instructions are provided to assist you in using this
-            presentation template effectively
-          <li>
-            At all times strive to maintain Google's corporate look and feel
-        </ul>
-      </article>
-
-      <article>
-        <h3>
-          Slide with a table
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article class='smaller'>
-        <h3>
-          Slide with a table (smaller text)
-        </h3>
-        
-        <table>
-          <tr>
-            <th>
-              Name
-            <th>
-              Occupation
-          <tr>
-            <td>
-              Luke Mahé
-            <td>
-              V.P. of Keepin’ It Real
-          <tr>
-            <td>
-              Marcin Wichary
-            <td>
-              The Michael Bay of Doodles
-        </table>
-      </article>
-      
-      <article>
-        <h3>
-          Styles
-        </h3>
-        <ul>
-          <li>
-            <span class='red'>class="red"</span>
-          <li>
-            <span class='blue'>class="blue"</span>
-          <li>
-            <span class='green'>class="green"</span>
-          <li>
-            <span class='yellow'>class="yellow"</span>
-          <li>
-            <span class='black'>class="black"</span>
-          <li>
-            <span class='white'>class="white"</span>
-          <li>
-            <b>bold</b> and <i>italic</i>
-        </ul>
-      </article>
-      
-      <article>
-        <h2>
-          Segue slide
-        </h2>
-      </article>
-
-      <article>
-        <h3>
-          Slide with an image
-        </h3>
-        <p>
-          <img style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Sergey Brin
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          Slide with an image (centered)
-        </h3>
-        <p>
-          <img class='centered' style='height: 500px' src='images/example-graph.png'>
-        </p>
-        <div class='source'>
-          Source: Larry Page
-        </div>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Image filling the slide (with optional header)
-        </h3>
-        <p>
-          <img src='images/example-cat.jpg'>
-        </p>
-        <div class='source white'>
-          Source: Eric Schmidt
-        </div>
-      </article>
-
-      <article>
-        <h3>
-          This slide has some code
-        </h3>
-        <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
-</pre>
-        </section>
-      </article>
-      
-      <article class='smaller'>
-        <h3>
-          This slide has some code (small font)
-        </h3>
-        <section>
-        <pre>
-&lt;script type='text/javascript'&gt;
-  // Say hello world until the user starts questioning
-  // the meaningfulness of their existence.
-  function helloWorld(world) {
-    for (var i = 42; --i &gt;= 0;) {
-      alert('Hello ' + String(world));
-    }
-  }
-&lt;/script&gt;
-&lt;style&gt;
-  p { color: pink }
-  b { color: blue }
-  u { color: 'umber' }
-&lt;/style&gt;
-</pre>
-        </section>
-      </article>
-      
-      <article>
-        <q>
-          The best way to predict the future is to invent it.
-        </q>
-        <div class='author'>
-          Alan Kay
-        </div>
-      </article>
-      
-      <article class='smaller'>
-        <q>
-          A distributed system is one in which the failure of a computer 
-          you didn’t even know existed can render your own computer unusable.
-        </q>
-        <div class='author'>
-          Leslie Lamport
-        </div>
-      </article>
-      
-      <article class='nobackground'>
-        <h3>
-          A slide with an embed + title
-        </h3>
-        
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-
-      <article class='nobackground'>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-
-      <article class='fill'>
-        <h3>
-          Full-slide embed with (optional) slide title on top
-        </h3>
-        <iframe src='http://www.google.com/doodle4google/history.html'></iframe>
-      </article>
-      
-      <article>
-        <h3>
-          Thank you!
-        </h3>
-        
-        <ul>
-          <li>
-            <a href='http://www.google.com'>google.com</a>
-        </ul>
       </article>
 
     </section>

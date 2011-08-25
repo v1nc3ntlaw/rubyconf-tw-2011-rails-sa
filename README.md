@@ -12,8 +12,8 @@ Sheng-Zhe Lin is a Rails Developer and Linux System Administrator at Techbang. H
 Subjects
 --------
 
-1. Rails production server
-2. Monitor rails
-3. Passenger tuning
-4. Load balancing on rails
-5. Rails backup solution
+1. Rails Production Server
+2. Rails and Server Monitoring
+3. Nginx and Passenger Tuning
+4. Load Balancing on Rails
+5. Rails Backup Solution

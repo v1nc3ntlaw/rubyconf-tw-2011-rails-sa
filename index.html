@@ -30,6 +30,9 @@
   </head>
   
   <style>
+    body h1.upper {
+      margin-top: 100px;
+    }
     body h3 {
       font-size: 36px;
     }
@@ -135,14 +138,6 @@
       </article>
 
       <article>
-        <h1>God</h1>
-        <p>save me</p>
-        <div class="source">
-          http://rubygems.org/gems/god
-        </div>
-      </article>
-
-      <article>
         <h1>Open Source Solution</h1>
         <p>Nagios + Cacti</p>
       </article>
@@ -175,6 +170,14 @@
         </ul>
         <div class="source">
           http://www.cacti.net/
+        </div>
+      </article>
+
+      <article>
+        <h1>God</h1>
+        <p>save me</p>
+        <div class="source">
+          http://rubygems.org/gems/god
         </div>
       </article>
 
@@ -222,7 +225,50 @@ config.cache_store = :mem_cache_store, MEMCACHE_SERVERS, {
       </article>
 
       <article>
-        <h3>Whenever</h3>
+        <h1 class="upper">Whenever</h1>
+        <p>Cron jobs in Ruby</p>
+        <p>
+          Linux Crontab Format<br/>
+          # min hour dom mon dow command
+        </p>
+        <table>
+          <tr>
+            <td>
+              every :hour
+            <td>
+              every 3.hours
+            <td>
+              every 1.hour, :at => 30
+          <tr>
+            <td colspan="2">
+              every 1.day, :at => '4:30 am'
+            <td>
+              every '0 0 27-31 * *'
+        </table>
+      </article>
+
+      <article>
+        <h1 class="upper">Whenever</h1>
+        <p>job_type: command, rake task</p>
+<pre>
+# whenever config/schedule.rb
+every 1.day, :at => "23:45" do
+  command "echo 'Say Hello!'"
+  rake "mail:notification"
+end
+# generated crontab
+45 23 * * * /bin/bash -l -c 'echo '\''Say Hello!'\'''
+45 23 * * * /bin/bash -l -c 'cd project && \
+RAILS_ENV=production bundle exec rake mail:notification'</pre>
+      </article>
+
+      <article>
+        <h1 class="upper">Whenever</h1>
+        <p>Capistrano integration, update crontab with deploy</p>
+<pre>
+# config/deploy.rb
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"</pre>
         <div class="source">
           http://rubygems.org/gems/whenever
         </div>

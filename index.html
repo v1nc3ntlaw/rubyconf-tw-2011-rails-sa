@@ -143,7 +143,7 @@
       </article>
 
       <article>
-        <h3>Nagios</h3>
+        <h1 class="upper">Nagios</h1>
         <p>services current status, unusual situation or crash alert</p>
         <p><img src="images/nagios-irc-alert-6d1x.png"></p>
         <div class="source">
@@ -212,15 +212,13 @@
       </article>
 
       <article>
-        <h3>Memcached Distribute and Failover</h3>
+        <h1 class="upper" style="font-size: 48px;">Memcached Distribute and Failover</h1>
         <p>config/enviroments/production.rb</p>
-        <section>
 <pre>
 MEMCACHE_SERVERS = ["192.168.100.3:11211", "192.168.100.4:11211"]
 config.cache_store = :mem_cache_store, MEMCACHE_SERVERS, {
   :namespace => "techbang"
 }</pre>
-        </section>
       </article>
 
       <article>
@@ -236,6 +234,9 @@ config.cache_store = :mem_cache_store, MEMCACHE_SERVERS, {
           # min hour dom mon dow command
         </p>
         <table>
+          <tr>
+            <th colspan="3">
+              Whenever DSL
           <tr>
             <td>
               every :hour

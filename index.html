@@ -124,14 +124,16 @@
       </article>
 
       <article>
-        <h3>New Relic</h3>
+        <h1>New Relic</h1>
+        <p>Monitor, Troubleshoot and Tune Your Production Application</p>
         <div class="source">
           http://newrelic.com/
         </div>
       </article>
 
       <article>
-        <h3>Scout</h3>
+        <h1>Scout</h1>
+        <p>Monitoring Server Cluster</p>
         <div class="source">
           https://scoutapp.com/
         </div>
@@ -175,7 +177,7 @@
 
       <article>
         <h1>God</h1>
-        <p>save me</p>
+        <p>Process Monitoring Framework in Ruby</p>
         <div class="source">
           http://rubygems.org/gems/god
         </div>
@@ -186,20 +188,43 @@
       </article>
 
       <article>
-        <h3>Nginx and Passenger Configuration</h3>
+        <h3>Break Limits, Unleashed Power</h3>
+        <p>/opt/nginx/conf/nginx.conf</p>
 <pre>
-worker_processes 16;
+worker_processes 16;        # cat /proc/cpuinfo
 worker_rlimit_nofile 32768;
 
-events {
-  worker_connections 8192;
+events {                   # max_clients =
+  worker_connections 8192; # worker_processes * worker_connections
   use epoll;
 }
+</pre>
+        <p>/etc/security/limits.conf</p>
+<pre>
+rails soft nofile 32768
+rails hard nofile 32768
 </pre>
       </article>
 
       <article>
-        <h3>Nginx upload module</h3>
+        <h1 class="upper">Passenger Configuration</h1>
+<pre>
+$ passenger-memory-stats
+----- Passenger processes ------
+PID    VMSize    Private   Name
+--------------------------------
+3054   365.8 MB  150.2 MB  Rack: /home/rails/project/current
+</pre>
+<pre>
+passenger_max_pool_size 20; # Private 150.2 * 20 = 3624 MB</pre>
+        <div class="source">
+          http://blog.scoutapp.com/articles/2009/12/08/production-rails-tuning-with-passenger-passengermaxprocesses
+        </div>
+      </article>
+
+      <article>
+        <h1>Nginx upload module with Paperclip</h1>
+        <p>moved hard work from Ruby to C
         <div class="source">
           http://matthewhutchinson.net/2010/1/6/nginx-upload-module-with-paperclip-on-rails
         </div>
